@@ -43,11 +43,11 @@ const Login: React.FC = () => {
   const handleSubmit = async (values: API.LoginParams) => {
     try {
       // 登录
-      const msg = await login({
+      const user = await login({
         ...values,
         type,
       });
-      if (msg.status === 'ok') {
+      if (user.status === 'ok') {
         const defaultLoginSuccessMessage = '登录成功！';
         message.success(defaultLoginSuccessMessage);
         await fetchUserInfo();
@@ -60,9 +60,8 @@ const Login: React.FC = () => {
         history.push(redirect || '/');
         return;
       }
-      console.log(msg);
       // 如果失败去设置用户错误信息
-      setUserLoginState(msg);
+      setUserLoginState(user);
     } catch (error) {
       const defaultLoginFailureMessage = '登录失败，请重试！';
       message.error(defaultLoginFailureMessage);
@@ -75,7 +74,7 @@ const Login: React.FC = () => {
         <LoginForm
           logo={<img alt="logo" src={SYSTEM_LOGO}/>}
           title="User Center"
-          subTitle={<a href={SYSTEM_DESCRIPTION} target="_blank" rel="noreferrer">This is a description about user center.</a>}
+          subTitle={<a href={SYSTEM_DESCRIPTION} target="_blank" rel="noreferrer">Descriptions about User Center.</a>}
           initialValues={{
             autoLogin: true,
           }}
@@ -93,7 +92,7 @@ const Login: React.FC = () => {
           {type === 'account' && (
             <>
               <ProFormText
-                name="username"
+                name="userAccount"
                 fieldProps={{
                   size: 'large',
                   prefix: <UserOutlined className={styles.prefixIcon}/>,
@@ -107,7 +106,7 @@ const Login: React.FC = () => {
                 ]}
               />
               <ProFormText.Password
-                name="password"
+                name="userPassword"
                 fieldProps={{
                   size: 'large',
                   prefix: <LockOutlined className={styles.prefixIcon}/>,
@@ -118,6 +117,11 @@ const Login: React.FC = () => {
                     required: true,
                     message: 'User password is required!',
                   },
+                  {
+                    min: 8,
+                    type: 'string',
+                    message: 'Length cannot less than 8.',
+                  }
                 ]}
               />
             </>
