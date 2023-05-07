@@ -47,7 +47,7 @@ const Login: React.FC = () => {
         ...values,
         type,
       });
-      if (user.status === 'ok') {
+      if (user) {
         const defaultLoginSuccessMessage = '登录成功！';
         message.success(defaultLoginSuccessMessage);
         await fetchUserInfo();
