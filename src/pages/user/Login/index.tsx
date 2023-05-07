@@ -72,6 +72,11 @@ const Login: React.FC = () => {
     <div className={styles.container}>
       <div className={styles.content}>
         <LoginForm
+          submitter={{
+            searchConfig: {
+              submitText: 'Login'
+            }
+          }}
           logo={<img alt="logo" src={SYSTEM_LOGO}/>}
           title="User Center"
           subTitle={<a href={SYSTEM_DESCRIPTION} target="_blank" rel="noreferrer">Descriptions about User Center.</a>}
