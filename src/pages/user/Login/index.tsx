@@ -1,17 +1,10 @@
 import Footer from '@/components/Footer';
 import {login} from '@/services/ant-design-pro/api';
-import {
-  LockOutlined,
-  UserOutlined,
-} from '@ant-design/icons';
-import {
-  LoginForm,
-  ProFormCheckbox,
-  ProFormText,
-} from '@ant-design/pro-components';
+import {LockOutlined, UserOutlined,} from '@ant-design/icons';
+import {LoginForm, ProFormCheckbox, ProFormText,} from '@ant-design/pro-components';
 import {Alert, message, Tabs} from 'antd';
 import React, {useState} from 'react';
-import {history, useModel} from 'umi';
+import {history, Link, useModel} from 'umi';
 import styles from './index.less';
 import {SYSTEM_DESCRIPTION, SYSTEM_LOGO} from "@/constants";
 
@@ -40,7 +33,7 @@ const Login: React.FC = () => {
       }));
     }
   };
-  const handleSubmit = async (values: API.LoginParams) => {
+  const handleSubmit = async (values: API.RegisterParams) => {
     try {
       // 登录
       const user = await login({
@@ -84,7 +77,7 @@ const Login: React.FC = () => {
             autoLogin: true,
           }}
           onFinish={async (values) => {
-            await handleSubmit(values as API.LoginParams);
+            await handleSubmit(values as API.RegisterParams);
           }}
         >
           <Tabs activeKey={type} onChange={setType}>
@@ -138,12 +131,16 @@ const Login: React.FC = () => {
             }}
           >
             <ProFormCheckbox noStyle name="autoLogin">
-              Remember Me
+              AutoLogin
             </ProFormCheckbox>
+            <Link to='/user/register'>New User</Link>
             <a
               style={{
                 float: 'right',
               }}
+              href='mailto:zy867031254@gmail.com'
+              target='_blank'
+              rel='noreferrer'
             >
               Forgot password
             </a>
