@@ -13,6 +13,7 @@ declare namespace API {
     userStatus: number;
     role?: number;
     createTime?: Date;
+    number?: string;
   };
 
   type LoginResult = {
@@ -66,6 +67,7 @@ declare namespace API {
     userAccount?: string;
     userPassword?: string;
     checkPassword?: string;
+    number?: string;
     type?: string;
   };
 
